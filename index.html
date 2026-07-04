@@ -208,7 +208,7 @@
     }
 
     .piece {
-      background: rgba(255,255,255,0.92);
+      background: #fdf9d9;
       border: 2px solid #d9ad38;
       border-radius: 8px;
       padding: 6px;
@@ -634,6 +634,130 @@
       cursor: pointer;
     }
 
+    .thank-you-overlay {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 22% 18%, rgba(255, 238, 174, 0.42), transparent 28%),
+        radial-gradient(circle at 78% 72%, rgba(255, 248, 220, 0.5), transparent 30%),
+        rgba(43, 36, 21, 0.42);
+      backdrop-filter: blur(6px);
+      z-index: 45;
+    }
+
+    .thank-you-overlay.show {
+      display: flex;
+    }
+
+    .thank-you-card {
+      position: relative;
+      overflow: hidden;
+      width: min(92vw, 620px);
+      background:
+        radial-gradient(circle at 18% 14%, rgba(255,255,255,0.9), transparent 24%),
+        linear-gradient(180deg, #ffffff, #fff7d7 74%, #fff1bf);
+      border: 4px solid #d9ad38;
+      border-radius: 26px;
+      padding: 34px 30px 30px;
+      color: #2b2415;
+      text-align: center;
+      box-shadow: 0 30px 90px rgba(43, 36, 21, 0.3), inset 0 0 0 3px rgba(255,255,255,0.58);
+      animation: awardIn 0.35s ease both;
+    }
+
+    .thank-you-card::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 2px dashed rgba(199, 155, 40, 0.4);
+      border-radius: 20px;
+      pointer-events: none;
+    }
+
+    .thank-you-card::after {
+      content: "✦";
+      position: absolute;
+      right: 28px;
+      top: 22px;
+      color: #c79b28;
+      font-size: 34px;
+      animation: sparkle 1.7s ease-in-out infinite;
+    }
+
+    .thank-you-sparkles {
+      position: absolute;
+      left: 24px;
+      top: 22px;
+      color: #c79b28;
+      font-size: 32px;
+      animation: sparkle 1.7s ease-in-out infinite 0.45s;
+    }
+
+    .thank-you-icon {
+      position: relative;
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(180deg, #f7cf58, #d9ad38);
+      color: #2b2415;
+      font-size: 50px;
+      box-shadow: 0 12px 34px rgba(217, 173, 56, 0.32);
+      z-index: 1;
+    }
+
+    .thank-you-card h2 {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 14px;
+      font-size: clamp(30px, 5vw, 42px);
+      line-height: 1.2;
+    }
+
+    .thank-you-title-main,
+    .thank-you-title-place {
+      display: block;
+    }
+
+    .thank-you-title-place {
+      margin-top: 8px;
+      color: #8b5b11;
+      font-size: 1.08em;
+      text-shadow: 0 2px 0 rgba(255,255,255,0.9);
+    }
+
+    .thank-you-card p {
+      position: relative;
+      z-index: 1;
+      margin: 0 auto 20px;
+      max-width: 90%;
+      font-size: clamp(20px, 3.4vw, 25px);
+      line-height: 1.7;
+      font-weight: bold;
+    }
+
+    .thank-you-note {
+      background: rgba(255,255,255,0.62);
+      border: 2px solid rgba(217, 173, 56, 0.52);
+      border-radius: 18px;
+      padding: 12px 16px;
+      color: #5f4216;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.62);
+    }
+
+    .thank-you-card .primary-action {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 360px;
+    }
+
     .intro-overlay {
       position: fixed;
       inset: 0;
@@ -650,7 +774,7 @@
       width: min(92vw, 560px);
       background: linear-gradient(180deg, #ffffff, #fff8df);
       border: 4px solid #d9ad38;
-      border-radius: 10px;
+      border-radius: 26px;
       padding: 28px;
       color: #2b2415;
       text-align: center;
@@ -679,17 +803,44 @@
       font-weight: bold;
       cursor: pointer;
       margin: 8px 5px 0;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, color 0.18s ease;
     }
 
     .primary-action {
       background: #2b2415;
       color: #fffdf2;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .primary-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 24px rgba(0, 0, 0, 0.16);
+      background: #3d3226;
+    }
+
+    .primary-action:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+      background: #2f261d;
     }
 
     .secondary-action {
       background: #fffdf2;
       color: #2b2415;
       border: 2px solid #d9ad38;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5);
+    }
+
+    .secondary-action:hover {
+      transform: translateY(-2px);
+      background: #fff8df;
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .secondary-action:active {
+      transform: translateY(0);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6);
+      background: #fff3d4;
     }
 
     .challenge-two {
@@ -725,6 +876,40 @@
       margin: 0;
       font-size: 20px;
       font-weight: bold;
+    }
+
+    .finish-challenge-button {
+      border: none;
+      background: #2b2415;
+      color: #fffdf2;
+      border-radius: 50%;
+      width: 54px;
+      height: 54px;
+      padding: 0;
+      font-size: 28px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .finish-challenge-button:hover {
+      transform: translateY(-2px);
+      background: #3c2c1f;
+      box-shadow: 0 12px 22px rgba(0,0,0,0.14);
+    }
+
+    .finish-challenge-button:active {
+      transform: translateY(0);
+      background: #4b392d;
+    }
+
+    .finish-challenge-area {
+      max-width: 820px;
+      margin: 20px auto 0;
+      text-align: left;
     }
 
     .cards-grid {
@@ -920,6 +1105,17 @@
         transform: translateY(0) scale(1);
       }
     }
+
+    @keyframes sparkle {
+      0%, 100% {
+        opacity: 0.5;
+        transform: scale(0.88) rotate(0deg);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.18) rotate(12deg);
+      }
+    }
   </style>
 </head>
 
@@ -992,6 +1188,9 @@
     <p>اختاري بطاقة، واقرئي السؤال، ونفّذي طريقة الإجابة المكتوبة على البطاقة.</p>
   </div>
   <div class="cards-grid" id="cardsGrid"></div>
+  <div class="finish-challenge-area">
+    <button type="button" class="finish-challenge-button" id="finishChallengeButton" aria-label="الانتقال إلى النهاية">←</button>
+  </div>
 </section>
 
 <button class="reset" onclick="location.reload()">إعادة</button>
@@ -1016,6 +1215,18 @@
       <button type="button" class="secondary-action" onclick="location.reload()">إعادة التحدي</button>
       <button type="button" class="primary-action" id="goToChallengeTwo">الانتقال للتحدي الثاني</button>
     </div>
+  </div>
+</div>
+<div class="thank-you-overlay" id="thankYouOverlay" role="dialog" aria-modal="true" aria-labelledby="thankYouTitle">
+  <div class="thank-you-card">
+    <div class="thank-you-sparkles">✦</div>
+    <div class="thank-you-icon">🎉</div>
+    <h2 id="thankYouTitle">
+      <span class="thank-you-title-main">أحسنتن يا نحلات</span>
+      <span class="thank-you-title-place">جامع الرحمن</span>
+    </h2>
+    <p class="thank-you-note">مثل خلية النحل، تعاونتن بمحبة ونشاط حتى اكتمل التحدي بأجمل صورة.</p>
+    <button type="button" class="primary-action" id="thankYouClose">نهاية التحدي</button>
   </div>
 </div>
 <script>
@@ -1153,6 +1364,16 @@
     }, 650);
   }
 
+  function showThankYou() {
+    challengeTwo.classList.remove("show");
+    document.getElementById("thankYouOverlay").classList.add("show");
+  }
+
+  function closeThankYou() {
+    document.getElementById("thankYouOverlay").classList.remove("show");
+    location.reload();
+  }
+
   function startFirstChallenge() {
     introOverlay.style.display = "none";
     showMessage("التحدي الأول: رتّبي خطوات الوضوء", 1800);
@@ -1221,6 +1442,7 @@
     }
   }
 
+  const finishChallengeButton = document.getElementById("finishChallengeButton");
   const challengeCards = [
     { image: 13, question: "أجب بصح أو خطأ مع التعليل: المانيكير لا يمنع وصول الماء إلى الأظافر لذلك لا يجب إزالته قبل الوضوء." },
     { image: 14, question: "ماذا نقول مباشرة بعد الانتهاء من الوضوء لننال أجراً عظيماً؟" },
@@ -1251,8 +1473,12 @@
     cardsGrid.appendChild(button);
   });
 
-  const nums = [1,2,3,4,5,6,7,8,9,10,11,12]
+  const shuffledIds = [1,2,3,4,5,6,7,8,9,10,11,12]
+    .filter(n => n !== 1)
     .sort(() => Math.random() - 0.5);
+  const leftNums = [shuffledIds[0], shuffledIds[1], 1, shuffledIds[2], shuffledIds[3], shuffledIds[4]];
+  const rightNums = shuffledIds.slice(5);
+  const nums = [...leftNums, ...rightNums];
 
   nums.forEach((num, index) => {
     const piece = document.createElement("div");
@@ -1343,6 +1569,8 @@
   startChallengeOne.addEventListener("click", startFirstChallenge);
   startChallengeTwo.addEventListener("click", startSecondChallenge);
   goToChallengeTwo.addEventListener("click", startSecondChallenge);
+  finishChallengeButton.addEventListener("click", showThankYou);
+  document.getElementById("thankYouClose").addEventListener("click", closeThankYou);
 </script>
 
 </body>
